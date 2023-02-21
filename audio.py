@@ -9,11 +9,11 @@ for device in devices:
 
 # MAC address of the Bluetooth speaker
 speaker_addr = '6C:47:60:A9:C2:B8'
-
+print(1)
 # Connect to the Bluetooth speaker
 sock = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
 sock.connect((speaker_addr, 1))
-
+print(2)
 # Play audio on the speaker
 sock.send(b'Hello, world!')
 
