@@ -1,29 +1,24 @@
-import pygame
-import time
-import os
+import bluetooth
 
-# Initialize Pygame mixer
-pygame.mixer.init()
+# Search for nearby Bluetooth devices
+devices = bluetooth.discover_devices()
 
-# Set the Bluetooth audio device name
-device_name = 'JBL Flip 4'
+# Print the names of the nearby devices
+for device in devices:
+    print(device, bluetooth.lookup_name(device))
 
-# Set the audio file to play
-audio_file = 'sound.wav'
+# MAC address of the Bluetooth speaker
+speaker_addr = '6C:47:60:A9:C2:B8'
 
-# Create the Bluetooth audio device with BlueALSA
-device_addr = 'bluez_sink.' + device_name.replace(' ', '_')
-os.system('sudo bluealsa-aplay -d {} {} &'.format(device_addr, audio_file))
+# Connect to the Bluetooth speaker
+sock = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
+sock.connect((speaker_addr, 1))
 
-# Wait for the device to connect
-time.sleep(3)
+# Play audio on the speaker
+sock.send(b'Hello, world!')
 
-# Load the audio file
-sound = pygame.mixer.Sound(audio_file)
+# Disconnect from the speaker
+sock.close()
 
-# Play the audio file
-sound.play()
 
-# Wait for the audio to finish playing
-while pygame.mixer.get_busy():
-    time.sleep(1)
+
