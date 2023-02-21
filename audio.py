@@ -9,7 +9,7 @@ pygame.mixer.init()
 device_name = 'JBL Flip 4'
 
 # Set the audio file to play
-audio_file = 'sound.m4a'
+audio_file = 'sound.wav'
 
 # Create the Bluetooth audio device with BlueALSA
 device_addr = 'bluez_sink.' + device_name.replace(' ', '_')
