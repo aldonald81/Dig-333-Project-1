@@ -8,6 +8,7 @@ city = 'Davidson'
 
 # Set up the API URL
 url = f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}'
+# https://api.openweathermap.org/data/2.5/weather?lat=35.4993&lon=80.8487&appid=f95cf4e0206468f647dd9c15d50
 
 # Send the HTTP request and receive the response
 response = requests.get(url)
