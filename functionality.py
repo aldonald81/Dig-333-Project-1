@@ -44,7 +44,7 @@ description = data['weather'][0]['description']
 
 ### Set off alarm
 print("ALARM GOING OFF \n")
-for i in range(5):
+for j in range(5):
     GPIO.output(18, GPIO.HIGH)
     time.sleep(1)
     GPIO.output(18, GPIO.LOW)
