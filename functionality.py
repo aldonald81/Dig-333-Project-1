@@ -6,9 +6,12 @@ import requests
 # Set the GPIO pin numbering mode to BCM
 GPIO.setmode(GPIO.BCM)
 
-# Set up the GPIO pin for the LDR
+# Set up the GPIO pin for the components
 ldr_pin = 17
 GPIO.setup(ldr_pin, GPIO.IN)
+
+buzzer_pin = 18
+GPIO.setup(buzzer_pin, GPIO.OUT)
 
 # Run until LDR value == 1
 ldr_value = GPIO.input(ldr_pin)
@@ -35,14 +38,19 @@ response = requests.get(url)
 data = response.json()
 
 # Extract the temperature and description from the data
-temperature = (int(data['main']['temp']) - 273.15) * 1.8 + 32
+temperature = round((int(data['main']['temp']) - 273.15) * 1.8 + 32, 0)
 description = data['weather'][0]['description']
 
 
 ### Set off alarm
 print("ALARM GOING OFF \n")
+for i in range(5):
+    GPIO.output(18, GPIO.HIGH)
+    time.sleep(1)
+    GPIO.output(18, GPIO.LOW)
+    time.sleep(1)
 
-print(f'The temperature in {city} is {temperature} Fahrenheit.')
+print(f'The temperature in {city} is {temperature} degrees Fahrenheit.')
 print(f'The weather is {description}.')
 
 
