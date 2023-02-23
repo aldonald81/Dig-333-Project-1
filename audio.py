@@ -1,5 +1,5 @@
 import bluetooth
-
+import time 
 # Search for nearby Bluetooth devices
 devices = bluetooth.discover_devices()
 
@@ -16,6 +16,7 @@ print(1)
 sock = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
 sock.connect((speaker_addr, 1))
 print(2)
+time.sleep(10)
 # Play audio on the speaker
 sock.send(b'Hello, world!')
 
