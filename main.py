@@ -4,6 +4,9 @@
 3. Translate text to speech and play alarm and weather on speaker
 """
 
+import pygame
+
+
 
 from gtts import gTTS
 from playsound import playsound
@@ -20,8 +23,18 @@ tts = gTTS(text=text, lang=language)
 # Saving the converted audio in a mp3 file named sample.mp3
 tts.save("sample.mp3")
 
+
+filename = "sample.mp3"
+pygame.init()
+pygame.mixer.init()
+pygame.mixer.music.load(filename)
+pygame.mixer.music.play()
+while pygame.mixer.music.get_busy():
+    pygame.time.Clock().tick(10)
+
+
 # Playing the converted audio file
-playsound("sample.mp3")
+#playsound("sample.mp3")
 
 
 """
