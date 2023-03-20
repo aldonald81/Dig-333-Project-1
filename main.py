@@ -6,13 +6,12 @@
 
 import pygame
 
-
+import RPi.GPIO as GPIO
+import time
+import requests
 
 from gtts import gTTS
 from playsound import playsound
-
-import RPi.GPIO as GPIO
-import time
 
 ### READ VALUE FROM LDR
 mpin=17
@@ -49,10 +48,30 @@ while t < 1000000:
     
     # if resistance (t) is above some value, exit and trigger the alarm
 
+### FETCH WEATHER DATA FOR CURRENT MOMENT
+api_key = 'f95cf4e0206468f647dd9c15d5092f6e'
+city = 'Davidson'
+url = f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}'
+# https://api.openweathermap.org/data/2.5/weather?lat=35.4993&lon=80.8487&appid=f95cf4e0206468f647dd9c15d50
+
+# Send the HTTP request and receive the response
+response = requests.get(url)
+
+# Parse the JSON response data into a Python dictionary
+data = response.json()
+
+# Extract the temperature and description from the data
+temperature = round((int(data['main']['temp']) - 273.15) * 1.8 + 32, 0)
+description = data['weather'][0]['description']
+
+weather_text = f'The temperature in {city} is {temperature} degrees Fahrenheit and the weather is {description}'
+
+
+### TEXT TO SPEECH AND ANNOUNCE ON ALARM
 
 print("alarm")
 
-text = "Hello, how are you?"
+text = weather_text
 
 # Language in which you want to convert
 language = 'en'
