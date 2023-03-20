@@ -23,6 +23,7 @@ adj=2.130620985
 i=0
 t=0
 while t < 100000:
+    print(t)
     GPIO.setup(mpin, GPIO.OUT)
     GPIO.setup(tpin, GPIO.OUT)
     GPIO.output(mpin, False)
