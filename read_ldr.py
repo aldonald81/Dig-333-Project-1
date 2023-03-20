@@ -1,18 +1,32 @@
 import RPi.GPIO as GPIO
 import time
-
-# Set the GPIO pin numbering mode to BCM
+mpin=17
+tpin=27
 GPIO.setmode(GPIO.BCM)
-
-# Set up the GPIO pin for the LDR
-ldr_pin = 17
-GPIO.setup(ldr_pin, GPIO.IN)
-
-# Read the LDR value 10 times and print the results
-for i in range(10):
-    ldr_value = GPIO.input(ldr_pin)
-    print("LDR value:", ldr_value)
-    time.sleep(1)
-
-# Clean up the GPIO pins
-GPIO.cleanup()
+cap=0.000001
+adj=2.130620985
+i=0
+t=0
+while True:
+    GPIO.setup(mpin, GPIO.OUT)
+    GPIO.setup(tpin, GPIO.OUT)
+    GPIO.output(mpin, False)
+    GPIO.output(tpin, False)
+    time.sleep(0.2)
+    GPIO.setup(mpin, GPIO.IN)
+    time.sleep(0.2)
+    GPIO.output(tpin, True)
+    starttime=time.time()
+    endtime=time.time()
+    while (GPIO.input(mpin) == GPIO.LOW):
+        endtime=time.time()
+    measureresistance=endtime-starttime
+    
+    res=(measureresistance/cap)*adj
+    i=i+1
+    t=t+res
+    if i==10:
+        t=t/i
+        print(t)
+        i=0
+        t=0
