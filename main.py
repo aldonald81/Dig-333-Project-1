@@ -3,6 +3,7 @@
 2. Fetch weather data on certain LDR value
 3. Translate text to speech and play alarm and weather on speaker
 """
+import sys
 
 import pygame
 
@@ -25,6 +26,7 @@ GPIO.setmode(GPIO.BOARD)
 pin=7
 
 wakeup = False
+#check time is in the morning: between 6am and 8pm
 while count < 65000: #WOULD TECHNIcALLY BE > THAN SINCE IT WOULD BE GETTING LIGHTER
 
     count = 0
@@ -66,60 +68,82 @@ while count < 65000: #WOULD TECHNIcALLY BE > THAN SINCE IT WOULD BE GETTING LIGH
     
     # if resistance (t) is above some value, exit and trigger the alarm
 
-### FETCH WEATHER DATA FOR CURRENT MOMENT
-api_key = 'f95cf4e0206468f647dd9c15d5092f6e'
-city = 'Davidson'
-url = f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}'
-# https://api.openweathermap.org/data/2.5/weather?lat=35.4993&lon=80.8487&appid=f95cf4e0206468f647dd9c15d50
 
-# Send the HTTP request and receive the response
-response = requests.get(url)
-
-# Parse the JSON response data into a Python dictionary
-data = response.json()
-
-# Extract the temperature and description from the data
-temperature = round((int(data['main']['temp']) - 273.15) * 1.8 + 32, 0)
-description = data['weather'][0]['description']
-
-weather_text = f'The temperature in {city} is {temperature} degrees Fahrenheit and the weather is {description}'
-
-
-### TEXT TO SPEECH AND ANNOUNCE ON ALARM
-
-print("alarm")
-
-## Set off buzzer to wake person up
 GPIO.setmode(GPIO.BCM)
-buzzer_pin = 10
-GPIO.setup(buzzer_pin, GPIO.OUT)
-"""
-print("ALARM GOING OFF \n")
-for j in range(5):
-    GPIO.output(10, GPIO.HIGH)
-    time.sleep(1)
-    GPIO.output(10, GPIO.LOW)
-    time.sleep(1)
-"""
-text = weather_text
+button_pin = 26
+GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+def button_callback(channel):
+    print("Button pressed!")
+    sys.exit() # STOP PROGRAM WHEN OFF IS PRESSED
+GPIO.add_event_detect(button_pin, GPIO.FALLING, callback=button_callback)
 
-# Language in which you want to convert
-language = 'en'
+## Run until the user pushes the button or it has run 4 times
+times = 0
+button_pushed = False
+while times < 4 :
+    ### FETCH WEATHER DATA FOR CURRENT MOMENT
+    api_key = 'f95cf4e0206468f647dd9c15d5092f6e'
+    lat = 35.4993
+    long = -80.8487
+    url = f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={long}&appid={api_key}'
+    # https://api.openweathermap.org/data/2.5/weather?lat=35.4993&lon=80.8487&appid=f95cf4e0206468f647dd9c15d50
 
-# Passing the text and language to the engine to generate speech
-tts = gTTS(text=text, lang=language)
+    # Send the HTTP request and receive the response
+    response = requests.get(url)
 
-# Saving the converted audio in a mp3 file named sample.mp3
-tts.save("sample.mp3")
+    # Parse the JSON response data into a Python dictionary
+    data = response.json()
+
+    # Extract the temperature and description from the data
+    temperature = round((int(data['main']['temp']) - 273.15) * 1.8 + 32, 0)
+    description = data['weather'][0]['description']
+
+    weather_text = f'The temperature in Davidson is {temperature} degrees Fahrenheit and the weather is {description}'
 
 
-filename = "sample.mp3"
-pygame.init()
-pygame.mixer.init()
-pygame.mixer.music.load(filename)
-pygame.mixer.music.play()
-while pygame.mixer.music.get_busy():
-    pygame.time.Clock().tick(10)
+    ### TEXT TO SPEECH AND ANNOUNCE ON ALARM
+
+    print("alarm")
+
+    ## Set off buzzer to wake person up
+    
+    buzzer_pin = 10
+    GPIO.setup(buzzer_pin, GPIO.OUT)
+    """
+    print("ALARM GOING OFF \n")
+    for j in range(5):
+        GPIO.output(10, GPIO.HIGH)
+        time.sleep(1)
+        GPIO.output(10, GPIO.LOW)
+        time.sleep(1)
+    """
+    text = weather_text
+
+    # Language in which you want to convert
+    language = 'en'
+
+    # Passing the text and language to the engine to generate speech
+    tts = gTTS(text=text, lang=language)
+
+    # Saving the converted audio in a mp3 file named sample.mp3
+    tts.save("sample.mp3")
+
+
+    filename = "sample.mp3"
+    pygame.init()
+    pygame.mixer.init()
+    pygame.mixer.music.load(filename)
+    pygame.mixer.music.play()
+    while pygame.mixer.music.get_busy():
+        pygame.time.Clock().tick(10)
+
+
+    times += 1
+
+    snooze = 15*60
+    time.sleep(snooze)
+
+
 
 
 # Playing the converted audio file
