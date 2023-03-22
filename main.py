@@ -26,6 +26,7 @@ GPIO.setmode(GPIO.BOARD)
 pin=7
 
 wakeup = False
+count=0
 #check time is in the morning: between 6am and 8pm
 while count < 65000: #WOULD TECHNIcALLY BE > THAN SINCE IT WOULD BE GETTING LIGHTER
 
