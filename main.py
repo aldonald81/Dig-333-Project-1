@@ -74,14 +74,14 @@ print("alarm")
 ## Set off buzzer to wake person up
 buzzer_pin = 10
 GPIO.setup(buzzer_pin, GPIO.OUT)
-
+"""
 print("ALARM GOING OFF \n")
 for j in range(5):
     GPIO.output(10, GPIO.HIGH)
     time.sleep(1)
     GPIO.output(10, GPIO.LOW)
     time.sleep(1)
-
+"""
 text = weather_text
 
 # Language in which you want to convert
