@@ -78,6 +78,11 @@ while count < 65000: #WOULD TECHNIcALLY BE > THAN SINCE IT WOULD BE GETTING LIGH
 #     sys.exit() # STOP PROGRAM WHEN OFF IS PRESSED
 # GPIO.add_event_detect(button_pin, GPIO.FALLING, callback=button_callback)
 
+## Set off buzzer to wake person up
+    
+buzzer_pin = 10
+GPIO.setup(buzzer_pin, GPIO.OUT)
+
 ## Run until the user pushes the button or it has run 4 times
 times = 0
 button_pushed = False
@@ -105,19 +110,14 @@ while times < 4 :
     ### TEXT TO SPEECH AND ANNOUNCE ON ALARM
 
     print("alarm")
-
-    ## Set off buzzer to wake person up
     
-    buzzer_pin = 10
-    GPIO.setup(buzzer_pin, GPIO.OUT)
-    """
     print("ALARM GOING OFF \n")
     for j in range(5):
         GPIO.output(10, GPIO.HIGH)
         time.sleep(1)
         GPIO.output(10, GPIO.LOW)
         time.sleep(1)
-    """
+    
     text = weather_text
 
     # Language in which you want to convert
