@@ -33,7 +33,7 @@ GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) # Set pin 10 to be an input 
 GPIO.add_event_detect(26,GPIO.RISING,callback=button_callback) # Setup event on pin 10 rising edge
 message = input("Press enter to quit\n\n") # Run until someone presses enter
 
-"""
+
 pin=4
 
 wakeup = False
@@ -151,7 +151,6 @@ while times < 4 :
 
 # Playing the converted audio file
 #playsound("sample.mp3")
-"""
 
 """
 import RPi.GPIO as GPIO
