@@ -71,13 +71,13 @@ while count < 65000: #WOULD TECHNIcALLY BE > THAN SINCE IT WOULD BE GETTING LIGH
     # if resistance (t) is above some value, exit and trigger the alarm
 
 
-# button_pin = 26
-# GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-# def button_callback(channel):
-#     print("Button pressed!")
-#     sys.exit() # STOP PROGRAM WHEN OFF IS PRESSED
-# GPIO.add_event_detect(button_pin, GPIO.FALLING, callback=button_callback)
-
+def button_callback(channel):
+    print("Button was pushed!")
+    GPIO.cleanup() # Clean up
+    sys.exit()
+GPIO.setwarnings(False) # Ignore warning for now
+GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) # Set pin 10 to be an input pin and set initial value to be pulled low (off)
+GPIO.add_event_detect(26,GPIO.RISING,callback=button_callback) # Setup event on pin 10 rising edge
 ## Set off buzzer to wake person up
     
 buzzer_pin = 10
