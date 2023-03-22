@@ -25,7 +25,7 @@ GPIO.setmode(GPIO.BOARD)
 pin=7
 
 wakeup = False
-while wakeup == False:
+while count < 65000: #WOULD TECHNIcALLY BE > THAN SINCE IT WOULD BE GETTING LIGHTER
 
     count = 0
     GPIO.setup(pin, GPIO.OUT)
@@ -38,6 +38,8 @@ while wakeup == False:
         count += 1
     
     print(count)
+
+
     # print(t)
     # GPIO.setup(mpin, GPIO.OUT)
     # GPIO.setup(tpin, GPIO.OUT)
