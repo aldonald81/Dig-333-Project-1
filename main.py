@@ -22,8 +22,9 @@ from playsound import playsound
 # adj=2.130620985
 # i=0
 # t=0
+
 GPIO.setmode(GPIO.BOARD)
-pin=7
+pin=4
 
 wakeup = False
 count=0
@@ -70,7 +71,6 @@ while count < 65000: #WOULD TECHNIcALLY BE > THAN SINCE IT WOULD BE GETTING LIGH
     # if resistance (t) is above some value, exit and trigger the alarm
 
 
-GPIO.setmode(GPIO.BCM)
 button_pin = 26
 GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 def button_callback(channel):
