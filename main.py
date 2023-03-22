@@ -23,7 +23,7 @@ from playsound import playsound
 # i=0
 # t=0
 
-GPIO.setmode(GPIO.BOARD)
+GPIO.setmode(GPIO.BCM)
 pin=4
 
 wakeup = False
