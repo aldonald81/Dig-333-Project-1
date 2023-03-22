@@ -71,12 +71,12 @@ while count < 65000: #WOULD TECHNIcALLY BE > THAN SINCE IT WOULD BE GETTING LIGH
     # if resistance (t) is above some value, exit and trigger the alarm
 
 
-button_pin = 26
-GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-def button_callback(channel):
-    print("Button pressed!")
-    sys.exit() # STOP PROGRAM WHEN OFF IS PRESSED
-GPIO.add_event_detect(button_pin, GPIO.FALLING, callback=button_callback)
+# button_pin = 26
+# GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+# def button_callback(channel):
+#     print("Button pressed!")
+#     sys.exit() # STOP PROGRAM WHEN OFF IS PRESSED
+# GPIO.add_event_detect(button_pin, GPIO.FALLING, callback=button_callback)
 
 ## Run until the user pushes the button or it has run 4 times
 times = 0
@@ -142,6 +142,7 @@ while times < 4 :
     times += 1
 
     snooze = 15*60
+    print("snoozing")
     time.sleep(snooze)
 
 
