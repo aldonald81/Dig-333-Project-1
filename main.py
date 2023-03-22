@@ -80,8 +80,6 @@ GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) # Set pin 10 to be an input 
 GPIO.add_event_detect(26,GPIO.RISING,callback=button_callback) # Setup event on pin 10 rising edge
 ## Set off buzzer to wake person up
     
-buzzer_pin = 10
-GPIO.setup(buzzer_pin, GPIO.OUT)
 
 ## Run until the user pushes the button or it has run 4 times
 times = 0
