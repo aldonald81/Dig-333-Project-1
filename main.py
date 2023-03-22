@@ -141,7 +141,7 @@ while times < 4 :
 
     times += 1
 
-    snooze = 15*60
+    snooze = 15
     print("snoozing")
     time.sleep(snooze)
 
