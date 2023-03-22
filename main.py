@@ -24,6 +24,16 @@ from playsound import playsound
 # t=0
 
 GPIO.setmode(GPIO.BCM)
+
+def button_callback(channel):
+    print("Button was pushed!")
+    sys.exit()
+GPIO.setwarnings(False) # Ignore warning for now
+GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) # Set pin 10 to be an input pin and set initial value to be pulled low (off)
+GPIO.add_event_detect(26,GPIO.RISING,callback=button_callback) # Setup event on pin 10 rising edge
+message = input("Press enter to quit\n\n") # Run until someone presses enter
+
+"""
 pin=4
 
 wakeup = False
@@ -71,17 +81,10 @@ while count < 65000: #WOULD TECHNIcALLY BE > THAN SINCE IT WOULD BE GETTING LIGH
     # if resistance (t) is above some value, exit and trigger the alarm
 
 
-def button_callback(channel):
-    print("Button was pushed!")
-    GPIO.cleanup() # Clean up
-    sys.exit()
-GPIO.setwarnings(False) # Ignore warning for now
-GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) # Set pin 10 to be an input pin and set initial value to be pulled low (off)
-GPIO.add_event_detect(26,GPIO.RISING,callback=button_callback) # Setup event on pin 10 rising edge
-## Set off buzzer to wake person up
-    
+
 
 ## Run until the user pushes the button or it has run 4 times
+GPIO.setup(10,GPIO.OUT)
 times = 0
 button_pushed = False
 while times < 4 :
@@ -148,7 +151,7 @@ while times < 4 :
 
 # Playing the converted audio file
 #playsound("sample.mp3")
-
+"""
 
 """
 import RPi.GPIO as GPIO
