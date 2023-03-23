@@ -24,6 +24,7 @@ GPIO.output(5, GPIO.LOW)
 
 def button_callback(channel):
     print("Button was pushed!")
+    GPIO.cleanup() # Clean up
     sys.exit()
 GPIO.setwarnings(False) # Ignore warning for now
 GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) # Set pin 10 to be an input pin and set initial value to be pulled low (off)
@@ -81,7 +82,7 @@ while times < 4 :
     print("alarm")
     
     print("ALARM GOING OFF \n")
-    for j in range(10):
+    for j in range(5):
         GPIO.output(10, GPIO.HIGH)
         time.sleep(1)
         GPIO.output(10, GPIO.LOW)
