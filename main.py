@@ -16,6 +16,12 @@ from playsound import playsound
 
 GPIO.setmode(GPIO.BCM)
 
+GPIO.setup(6, GPIO.OUT) #led
+GPIO.output(6, GPIO.LOW)
+
+GPIO.setup(5, GPIO.OUT) #led
+GPIO.output(5, GPIO.LOW)
+
 def button_callback(channel):
     print("Button was pushed!")
     sys.exit()
@@ -46,7 +52,7 @@ while count < 65000: #WOULD TECHNIcALLY BE > THAN SINCE IT WOULD BE GETTING LIGH
 
 ## Run until the user pushes the button or it has run 4 times
 GPIO.setup(10,GPIO.OUT)# buzzer
-GPIO.setup(6, GPIO.OUT) #led
+
 times = 0
 button_pushed = False
 while times < 4 :
@@ -111,9 +117,16 @@ while times < 4 :
         # Light up an LED for each snooze
         GPIO.output(6, GPIO.HIGH)
 
+    if(times == 2):
+        # Light up an LED for each snooze
+        GPIO.output(5, GPIO.HIGH)
+
     #>>>>>>>>>light up other leds for each wait
 
     time.sleep(snooze)
+
+
+GPIO.cleanup() # Clean up
 
 
 
