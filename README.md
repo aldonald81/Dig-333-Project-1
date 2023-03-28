@@ -23,5 +23,6 @@ The Sunrise Alarm is an alarm that goes off when the sun rises based on the amou
 - gTTs (Google Text To Speech)
     - Pre-trained AI model that converts strings of text to an mp3 file that can be played on the speaker
 
-
+## Development Process
+[Link to Dev Log](https://docs.google.com/document/d/102Un0wA5PAx8WMP2xizA6PiWHbftrRQiRD14P6ymWI4/edit?usp=sharing)
 
