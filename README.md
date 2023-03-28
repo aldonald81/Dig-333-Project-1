@@ -3,6 +3,9 @@
 ## Developer's Statement
 The Sunrise Alarm is an alarm that goes off when the sun rises based on the amount of light that is in the room and tells you information about the day such as the current weather information. The purpose of this alarm is to wake you up with the sun, so that you can get up and get after the day early. Some of the features of the alarm include a text-to-speech model that fetches and tells you the current weather, LEDs that let you know how many times the alarm has been snoozed, an LDR that records the amount of light in the room, and an on/off button that allows you to control the alarm. It has been very cool connecting the software workflow of reading the light values of the room, fetching the current weather data via the Open Weather API, and translating the text to a sound file to the physical components outputting the audio on a speaker, sounding the alarm with a buzzer, and lighting up LEDs based off data. The most difficult, yet fun, part of the project was figuring out how to connect all the code and hardware pieces. I tested all the components of the alarm separately (ie. setting off the buzzer or fetching the API data with Python), so there were some significant delays when combining them into one code file and a single circuit. It is cool to see it now with over 10 hardware components working in tandem to create a full alarm. With an annoying alarm that will certainly wake you up at the crack of dawn, people will get ahead of their day by knowing basic information such as weather before they even get out of bed. Therefore, this project is useful and can be used daily by people who would like to develop an early morning routine. The variability within when the alarm goes off based on light will give users some change day-to-day to keep the routine from getting too boring. 
 
+[Video Demo](https://drive.google.com/file/d/1rK302oVuYtESATUtC38FK1NZ5drNUEV3/view?usp=sharing)
+
+
 
 ## Hardware Components
 - Buzzer
